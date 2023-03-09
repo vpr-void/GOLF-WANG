@@ -83,6 +83,9 @@ flutter:
     - family: Cabinet Grotesk
       fonts:
         - asset: assets/fonts/CabinetGrotesk-Bold.otf
+    - family: Cabinet Grotesk Bold
+      fonts:
+        - asset: assets/fonts/CabinetGrotesk-ExtraBold.otf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

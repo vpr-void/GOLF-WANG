@@ -53,8 +53,8 @@ class GWMenu extends StatelessWidget {
           icon: "close",
         ),
       ),
-      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: Container(
+        color: Theme.of(context).colorScheme.secondary,
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 32),
         child: Column(
           children: [
@@ -207,17 +207,20 @@ class MenuRoute extends PageRouteBuilder {
 
   MenuRoute({required this.page})
       : super(
-          transitionDuration: const Duration(milliseconds: 300),
-          reverseTransitionDuration: const Duration(milliseconds: 300),
+          transitionDuration: const Duration(milliseconds: 500),
+          reverseTransitionDuration: const Duration(milliseconds: 500),
           pageBuilder: (ctx, animation, animation2) {
             return page;
           },
+          barrierColor: Colors.black38,
           transitionsBuilder: (ctx, animation, animation2, child) {
+            Animation<double> crv =
+                CurvedAnimation(parent: animation, curve: Curves.easeOutExpo);
             return SlideTransition(
               position: Tween<Offset>(
                 begin: const Offset(1, 0),
                 end: Offset.zero,
-              ).animate(animation),
+              ).animate(crv),
               child: child,
             );
           },

@@ -17,22 +17,24 @@ enum ItemTypes {
 }
 
 class Item {
+  final String id;
   final String name;
   final String description;
   final double price;
   final bool isNew;
   final bool isFav;
-  final ItemSizes size;
+  final List<ItemSizes> sizes;
   final ItemTypes itemTypes;
   final List<ItemDesign> designs;
 
   Item({
+    required this.id,
     required this.name,
     required this.description,
     required this.price,
     required this.isNew,
     required this.isFav,
-    required this.size,
+    required this.sizes,
     required this.itemTypes,
     required this.designs,
   });

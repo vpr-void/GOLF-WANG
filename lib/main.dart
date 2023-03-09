@@ -5,9 +5,9 @@ import 'pages/checkout.dart';
 import 'pages/create.dart';
 import 'pages/details.dart';
 import 'pages/manage.dart';
-import 'pages/menu.dart';
 import 'pages/orders.dart';
 import 'pages/shop.dart';
+import 'widgets/page_transitions.dart';
 
 void main() {
   runApp(GolfWang());
@@ -33,13 +33,17 @@ class GolfWang extends StatelessWidget {
         fontFamily: "Cabinet Grotesk",
         useMaterial3: true,
         colorScheme: customColors,
+        pageTransitionsTheme: PageTransitionsTheme(builders: {
+          TargetPlatform.android: FadeRoute(),
+          TargetPlatform.iOS: FadeRoute(),
+        }),
       ),
-      home: const GWShop(),
+      home: GWShop(),
       routes: {
         '/cart': (ctx) => GWCart(),
         '/checkout': (ctx) => GWCheckout(),
         '/orders': (ctx) => GWOrders(),
-        '/favs': (ctx) => const GWShop(),
+        '/favs': (ctx) => GWShop(),
         '/details': (ctx) => GWDetails(),
         '/manage': (ctx) => GWManage(),
         '/create': (ctx) => GWCreate(),
