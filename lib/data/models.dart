@@ -16,15 +16,15 @@ enum ItemTypes {
   accessories,
 }
 
-class Item {
+class Item with ChangeNotifier {
   final String id;
   final String name;
   final String description;
   final double price;
   final bool isNew;
-  final bool isFav;
+  bool isFav;
   final List<ItemSizes> sizes;
-  final ItemTypes itemTypes;
+  final ItemTypes itemType;
   final List<ItemDesign> designs;
 
   Item({
@@ -35,9 +35,13 @@ class Item {
     required this.isNew,
     required this.isFav,
     required this.sizes,
-    required this.itemTypes,
+    required this.itemType,
     required this.designs,
   });
+
+  void toggleFav() {
+    isFav = !isFav;
+  }
 }
 
 class ItemDesign {

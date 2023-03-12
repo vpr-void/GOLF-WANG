@@ -84,11 +84,13 @@ class GWNav extends StatelessWidget {
 class GWChip extends StatelessWidget {
   final String label;
   final bool isSelected;
+  final Color selectedColor;
 
   const GWChip({
     super.key,
     required this.label,
     this.isSelected = false,
+    this.selectedColor = const Color(0xFFA9C973),
   });
 
   @override
@@ -97,7 +99,7 @@ class GWChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       decoration: BoxDecoration(
         color: isSelected
-            ? Theme.of(context).colorScheme.surface
+            ? selectedColor
             : Theme.of(context).colorScheme.onBackground,
         borderRadius: BorderRadius.circular(25),
         border: Border.all(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
+import '../data/datas.dart';
 import '../widgets/nav.dart';
 import '../data/models.dart';
 import '../widgets/items.dart';
@@ -10,7 +12,7 @@ class GWDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final item = ModalRoute.of(context)!.settings.arguments as Item;
+    final itemId = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(120),
@@ -20,16 +22,16 @@ class GWDetails extends StatelessWidget {
         ),
       ),
       backgroundColor: Theme.of(context).colorScheme.tertiary,
-      body: DetailsBody(item: item),
+      body: DetailsBody(itemId: itemId),
     );
   }
 }
 
 class DetailsBody extends StatefulWidget {
-  final Item item;
+  final String itemId;
   const DetailsBody({
     super.key,
-    required this.item,
+    required this.itemId,
   });
 
   @override
@@ -37,8 +39,7 @@ class DetailsBody extends StatefulWidget {
 }
 
 class _DetailsBodyState extends State<DetailsBody> {
-  late bool isFav;
-  late ItemSizes selectedSize;
+  ItemSizes? selectedSize;
   late int currentImgIdx;
 
   void changeDropDownValue(val) {
@@ -55,14 +56,16 @@ class _DetailsBodyState extends State<DetailsBody> {
 
   @override
   void initState() {
-    isFav = widget.item.isFav;
-    selectedSize = widget.item.sizes[widget.item.sizes.length - 1];
     currentImgIdx = 0;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final data = Provider.of<ItemsProvider>(context, listen: false);
+    final item =
+        data.items.firstWhere((element) => element.id == widget.itemId);
+
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
@@ -80,8 +83,8 @@ class _DetailsBodyState extends State<DetailsBody> {
                 ),
               ),
               child: Hero(
-                tag: widget.item.id,
-                child: Image.network(widget.item.designs[currentImgIdx].img),
+                tag: item.id,
+                child: Image.network(item.designs[currentImgIdx].img),
               ),
             ),
             const SizedBox(height: 30),
@@ -94,21 +97,23 @@ class _DetailsBodyState extends State<DetailsBody> {
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
-                      widget.item.name,
+                      item.name,
                       style: const TextStyle(
                           fontSize: 24, fontFamily: "Cabinet Grotesk Bold"),
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isFav = !isFav;
-                    });
+                Consumer<ItemsProvider>(
+                  builder: (context, prov, child) {
+                    return GestureDetector(
+                      onTap: () {
+                        data.toggleFav(widget.itemId);
+                      },
+                      child: item.isFav
+                          ? SvgPicture.asset("assets/icons/heart_fill.svg")
+                          : SvgPicture.asset("assets/icons/heart_empty.svg"),
+                    );
                   },
-                  child: isFav
-                      ? SvgPicture.asset("assets/icons/heart_fill.svg")
-                      : SvgPicture.asset("assets/icons/heart_empty.svg"),
                 ),
               ],
             ),
@@ -116,7 +121,7 @@ class _DetailsBodyState extends State<DetailsBody> {
             Container(
               alignment: Alignment.centerLeft,
               child: ColorRow(
-                colors: [...widget.item.designs.map((e) => e.color)],
+                colors: [...item.designs.map((e) => e.color)],
                 space: 15,
                 size: 25,
                 border: 2,
@@ -125,20 +130,21 @@ class _DetailsBodyState extends State<DetailsBody> {
             ),
             const SizedBox(height: 25),
             Text(
-              widget.item.description,
+              item.description,
               style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 40),
             Row(
               children: [
                 GWDropdown(
-                  items: widget.item.sizes,
-                  selectedValue: selectedSize,
+                  items: item.sizes,
+                  selectedValue:
+                      selectedSize ?? item.sizes[item.sizes.length - 1],
                   onChange: changeDropDownValue,
                 ),
                 const Spacer(),
                 Text(
-                  "\$ ${widget.item.price.toStringAsFixed(0)}",
+                  "\$ ${item.price.toStringAsFixed(0)}",
                   style: const TextStyle(
                       fontSize: 28, fontFamily: "Cabinet Grotesk Bold"),
                 )

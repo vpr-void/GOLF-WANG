@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/cart.dart';
 import 'pages/checkout.dart';
@@ -8,6 +9,7 @@ import 'pages/manage.dart';
 import 'pages/orders.dart';
 import 'pages/shop.dart';
 import 'widgets/page_transitions.dart';
+import 'data/datas.dart';
 
 void main() {
   runApp(GolfWang());
@@ -27,27 +29,32 @@ class GolfWang extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "GolfWang",
-      theme: ThemeData(
-        fontFamily: "Cabinet Grotesk",
-        useMaterial3: true,
-        colorScheme: customColors,
-        pageTransitionsTheme: PageTransitionsTheme(builders: {
-          TargetPlatform.android: FadeRoute(),
-          TargetPlatform.iOS: FadeRoute(),
-        }),
+    return ChangeNotifierProvider(
+      create: (context) => ItemsProvider(),
+      child: MaterialApp(
+        title: "GolfWang",
+        theme: ThemeData(
+          fontFamily: "Cabinet Grotesk",
+          useMaterial3: true,
+          colorScheme: customColors,
+          pageTransitionsTheme: PageTransitionsTheme(builders: {
+            TargetPlatform.android: FadeRoute(),
+            TargetPlatform.iOS: FadeRoute(),
+          }),
+        ),
+        home: GWShop(),
+        routes: {
+          '/cart': (ctx) => GWCart(),
+          '/checkout': (ctx) => GWCheckout(),
+          '/orders': (ctx) => GWOrders(),
+          '/favs': (ctx) => GWShop(
+                isFavPage: true,
+              ),
+          '/details': (ctx) => const GWDetails(),
+          '/manage': (ctx) => GWManage(),
+          '/create': (ctx) => GWCreate(),
+        },
       ),
-      home: GWShop(),
-      routes: {
-        '/cart': (ctx) => GWCart(),
-        '/checkout': (ctx) => GWCheckout(),
-        '/orders': (ctx) => GWOrders(),
-        '/favs': (ctx) => GWShop(),
-        '/details': (ctx) => GWDetails(),
-        '/manage': (ctx) => GWManage(),
-        '/create': (ctx) => GWCreate(),
-      },
     );
   }
 }

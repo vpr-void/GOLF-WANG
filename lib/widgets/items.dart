@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../data/models.dart';
 
 class GWShopItem extends StatelessWidget {
-  final String id;
-  final String name;
-  final double price;
-  final String imageUrl;
-  final List<Color> colors;
+  final Color bgColor;
 
   const GWShopItem({
     super.key,
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.imageUrl,
-    required this.colors,
+    this.bgColor = const Color(0xFFFAB9C9),
   });
 
   @override
   Widget build(BuildContext context) {
+    final Item item = Provider.of<Item>(context);
+
     return Container(
       width: 160,
       decoration: BoxDecoration(
@@ -28,7 +23,7 @@ class GWShopItem extends StatelessWidget {
           width: 2,
           color: Theme.of(context).colorScheme.background,
         ),
-        color: Theme.of(context).colorScheme.secondary,
+        color: bgColor,
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).colorScheme.background,
@@ -48,9 +43,9 @@ class GWShopItem extends StatelessWidget {
               ),
             ),
             child: Hero(
-              tag: id,
+              tag: item.id,
               child: Image.network(
-                imageUrl,
+                item.designs[0].img,
                 width: 160,
                 height: 160,
                 fit: BoxFit.cover,
@@ -62,7 +57,7 @@ class GWShopItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name,
+                Text(item.name,
                     style: const TextStyle(
                       fontSize: 16,
                     )),
@@ -83,10 +78,13 @@ class GWShopItem extends StatelessWidget {
                         ),
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
-                      child: Text("\$ ${price.truncate()}",
+                      child: Text("\$ ${item.price.truncate()}",
                           style: const TextStyle(fontSize: 14)),
                     ),
-                    ColorRow(colors: colors, space: 6, size: 12)
+                    ColorRow(
+                        colors: [...item.designs.map((e) => e.color)],
+                        space: 6,
+                        size: 12)
                   ],
                 )
               ],
@@ -166,7 +164,7 @@ class GWDropdown extends StatelessWidget {
     return Container(
       width: 150,
       padding: const EdgeInsets.symmetric(
-        vertical: 14,
+        vertical: 0,
         horizontal: 14,
       ),
       decoration: BoxDecoration(
@@ -201,7 +199,6 @@ class GWDropdown extends StatelessWidget {
         iconEnabledColor: Colors.black,
         icon: SvgPicture.asset("assets/icons/dropdown.svg"),
         iconSize: 10,
-        isDense: true,
         itemHeight: 50,
         menuMaxHeight: 200,
       ),
