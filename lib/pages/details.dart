@@ -151,29 +151,17 @@ class _DetailsBodyState extends State<DetailsBody> {
               ],
             ),
             const SizedBox(height: 40),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                border: Border.all(
-                  width: 3,
-                  color: Theme.of(context).colorScheme.background,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Theme.of(context).colorScheme.background,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: const Center(
-                child: Text(
-                  "ADD TO CART",
-                  style: TextStyle(
-                      fontSize: 24, fontFamily: "Cabinet Grotesk Bold"),
-                ),
-              ),
+            GestureDetector(
+              onTap: () {
+                Provider.of<CartProvider>(context, listen: false).addToCart(
+                  "${item.name}_${currentImgIdx}_${(selectedSize ?? item.sizes[item.sizes.length - 1]).name}",
+                  item.name,
+                  selectedSize ?? item.sizes[item.sizes.length - 1],
+                  item.designs[currentImgIdx],
+                  item.price,
+                );
+              },
+              child: GWBigButton(text: "ADD TO CART"),
             )
           ],
         ),

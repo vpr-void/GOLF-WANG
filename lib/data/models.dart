@@ -50,3 +50,21 @@ class ItemDesign {
 
   ItemDesign(this.img, this.color);
 }
+
+class CartItem with ChangeNotifier {
+  final String id;
+  final String name;
+  final ItemSizes size;
+  final ItemDesign design;
+  final double price;
+  int quantity;
+
+  CartItem({
+    required this.id,
+    required this.name,
+    required this.design,
+    required this.size,
+    required this.price,
+    required this.quantity,
+  });
+}

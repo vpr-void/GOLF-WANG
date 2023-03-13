@@ -205,3 +205,39 @@ class GWDropdown extends StatelessWidget {
     );
   }
 }
+
+class GWBigButton extends StatelessWidget {
+  final String text;
+
+  const GWBigButton({
+    super.key,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        border: Border.all(
+          width: 3,
+          color: Theme.of(context).colorScheme.background,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.background,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 24, fontFamily: "Cabinet Grotesk Bold"),
+        ),
+      ),
+    );
+  }
+}

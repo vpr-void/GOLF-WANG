@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'pages/cart.dart';
 import 'pages/checkout.dart';
+import 'pages/confirm.dart';
 import 'pages/create.dart';
 import 'pages/details.dart';
 import 'pages/manage.dart';
@@ -29,8 +30,15 @@ class GolfWang extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ItemsProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ItemsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
+        ),
+      ],
       child: MaterialApp(
         title: "GolfWang",
         theme: ThemeData(
@@ -42,10 +50,11 @@ class GolfWang extends StatelessWidget {
             TargetPlatform.iOS: FadeRoute(),
           }),
         ),
-        home: GWShop(),
+        home: const GWShop(),
         routes: {
           '/cart': (ctx) => GWCart(),
           '/checkout': (ctx) => GWCheckout(),
+          '/confirm' : (ctx) => GWConfirm(),
           '/orders': (ctx) => GWOrders(),
           '/favs': (ctx) => GWShop(
                 isFavPage: true,

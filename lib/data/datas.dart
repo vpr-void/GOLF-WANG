@@ -240,3 +240,82 @@ class ItemsProvider with ChangeNotifier {
     notifyListeners();
   }
 }
+
+class CartProvider with ChangeNotifier {
+  Map<String, CartItem> _cartItems = {};
+  double deliveryFee = 10;
+
+  Map<String, CartItem> get getCart {
+    Map<String, CartItem> result = {..._cartItems};
+    result.removeWhere((key, value) => value.quantity == 0);
+    return result;
+  }
+
+  CartItem getCartItem(id) {
+    return _cartItems[id]!;
+  }
+
+  void addToCart(id, name, size, design, price) {
+    if (_cartItems.containsKey(id)) {
+      _cartItems.update(
+        id,
+        (value) => CartItem(
+          id: id,
+          name: name,
+          design: design,
+          size: size,
+          price: price,
+          quantity: value.quantity + 1,
+        ),
+      );
+    } else {
+      _cartItems[id] = CartItem(
+        id: id,
+        name: name,
+        design: design,
+        size: size,
+        price: price,
+        quantity: 1,
+      );
+    }
+    notifyListeners();
+  }
+
+  int get cartItemCount {
+    return _cartItems.length;
+  }
+
+  double get getTotal {
+    double total = 0;
+    _cartItems.forEach((key, value) {
+      total += value.price * value.quantity;
+    });
+    return total + deliveryFee;
+  }
+
+  void increaseItem(id) {
+    if (_cartItems.containsKey(id)) {
+      _cartItems[id]!.quantity += 1;
+      print("$id added");
+      notifyListeners();
+    }
+  }
+
+  void decreaseItem(id) {
+    if (_cartItems.containsKey(id)) {
+      if (_cartItems[id]!.quantity == 1) {
+        _cartItems.remove(id);
+      } else {
+        _cartItems[id]!.quantity -= 1;
+      }
+      notifyListeners();
+    }
+  }
+
+  void removeItem(id) {
+    if (_cartItems.containsKey(id)) {
+      _cartItems.remove(id);
+      notifyListeners();
+    }
+  }
+}

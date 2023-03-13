@@ -44,6 +44,7 @@ class GWMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(120),
         child: GWNav(
@@ -54,7 +55,6 @@ class GWMenu extends StatelessWidget {
         ),
       ),
       body: Container(
-        color: Theme.of(context).colorScheme.secondary,
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 32),
         child: Column(
           children: [
@@ -207,7 +207,7 @@ class MenuRoute extends PageRouteBuilder {
 
   MenuRoute({required this.page})
       : super(
-          transitionDuration: const Duration(milliseconds: 500),
+          transitionDuration: const Duration(milliseconds: 1000),
           reverseTransitionDuration: const Duration(milliseconds: 500),
           pageBuilder: (ctx, animation, animation2) {
             return page;
