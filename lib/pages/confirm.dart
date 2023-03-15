@@ -6,6 +6,11 @@ import '../widgets/nav.dart';
 import '../data/models.dart';
 
 class GWConfirm extends StatelessWidget {
+  final nameField = TextEditingController();
+  final emailField = TextEditingController();
+  final phoneField = TextEditingController();
+  final addressField = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final cartProv = Provider.of<CartProvider>(context, listen: false);
@@ -17,6 +22,14 @@ class GWConfirm extends StatelessWidget {
       width: 2,
       color: Theme.of(context).colorScheme.background,
     );
+
+    final contactInfo = Provider.of<ContactProvider>(context, listen: false);
+    nameField.text = contactInfo.fullName;
+    emailField.text = contactInfo.email;
+    phoneField.text = contactInfo.phone;
+    addressField.text = contactInfo.address;
+
+    final ordersProv = Provider.of<OrderProvider>(context, listen: false);
 
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -31,6 +44,7 @@ class GWConfirm extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 30, horizontal: 32),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
@@ -42,7 +56,9 @@ class GWConfirm extends StatelessWidget {
                     ),
                     Spacer(),
                     Text(
-                      "${cartProv.cartItemCount} items",
+                      cartProv.cartItemCount == 1
+                          ? "${cartProv.cartItemCount} items"
+                          : "${cartProv.cartItemCount} item",
                       style: TextStyle(
                         fontSize: 20,
                       ),
@@ -86,6 +102,158 @@ class GWConfirm extends StatelessWidget {
                         ),
                       ],
                     ),
+                  ),
+                ),
+                SizedBox(height: 50),
+                Text(
+                  "Contact Info.",
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      left: borSide,
+                      top: borSide,
+                      right: borSide,
+                    ),
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  child: TextField(
+                    controller: nameField,
+                    onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                    cursorColor: Theme.of(context).colorScheme.background,
+                    style: TextStyle(fontSize: 18),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Full Name",
+                      hintStyle: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      left: borSide,
+                      top: borSide,
+                      right: borSide,
+                    ),
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  child: TextField(
+                    controller: emailField,
+                    onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                    cursorColor: Theme.of(context).colorScheme.background,
+                    style: TextStyle(fontSize: 18),
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Email",
+                      hintStyle: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      left: borSide,
+                      top: borSide,
+                      right: borSide,
+                    ),
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  child: TextField(
+                    controller: phoneField,
+                    onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                    cursorColor: Theme.of(context).colorScheme.background,
+                    style: TextStyle(fontSize: 18),
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Phone",
+                      hintStyle: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      left: borSide,
+                      top: borSide,
+                      right: borSide,
+                    ),
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  child: TextField(
+                    controller: addressField,
+                    onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                    cursorColor: Theme.of(context).colorScheme.background,
+                    style: TextStyle(fontSize: 18),
+                    maxLines: 3,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Address",
+                      hintStyle: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    if (nameField.text != "" ||
+                        emailField.text != "" ||
+                        phoneField.text != "" ||
+                        addressField.text != "") {
+                      contactInfo.setValue(
+                        fullName: nameField.text,
+                        email: emailField.text,
+                        phone: phoneField.text,
+                        address: addressField.text,
+                      );
+                      ordersProv.createOrder(
+                        id: DateTime.now().millisecondsSinceEpoch.toString(),
+                        dateTime: DateTime.now(),
+                        total: cartProv.getTotal,
+                        buyerName: nameField.text,
+                        items: cartItems,
+                      );
+                      cartProv.clearCart();
+                      Navigator.of(context).pushNamed("/orders");
+                    }
+                  },
+                  child: Container(
+                    height: 70,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        border: Border.fromBorderSide(borSide),
+                        color: Theme.of(context).colorScheme.tertiary,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Theme.of(context).colorScheme.background,
+                            offset: const Offset(0, 3),
+                          ),
+                        ]),
+                    child: Center(
+                        child: Text(
+                      "CONFIRM ORDER.",
+                      style: TextStyle(fontSize: 18),
+                    )),
                   ),
                 )
               ],

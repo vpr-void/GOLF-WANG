@@ -241,3 +241,60 @@ class GWBigButton extends StatelessWidget {
     );
   }
 }
+
+class GWEmptyMessage extends StatelessWidget {
+  final String message;
+  final String icon;
+
+  const GWEmptyMessage({
+    super.key,
+    required this.message,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final borderSide = BorderSide(
+      width: 2,
+      color: Theme.of(context).colorScheme.background,
+    );
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 175, horizontal: 50),
+          decoration: BoxDecoration(
+            border: Border(
+              left: borderSide,
+              right: borderSide,
+              top: borderSide,
+            ),
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
+          child: Column(
+            children: [
+              SvgPicture.asset(
+                icon,
+                width: 75,
+                height: 75,
+              ),
+              SizedBox(height: 10),
+              Text(
+                message,
+                style: TextStyle(fontSize: 16),
+              )
+            ],
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed("/");
+          },
+          child: GWBigButton(text: "GO TO SHOP"),
+        ),
+      ],
+    );
+  }
+}

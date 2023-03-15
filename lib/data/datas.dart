@@ -318,4 +318,81 @@ class CartProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void clearCart() {
+    _cartItems = {};
+    notifyListeners();
+  }
+}
+
+class OrderProvider with ChangeNotifier {
+  List<Order> _orders = [];
+
+  List<Order> get getOrders {
+    return _orders;
+  }
+
+  void createOrder({
+    required id,
+    required dateTime,
+    required total,
+    required buyerName,
+    required items,
+  }) {
+    _orders.insert(
+      0,
+      Order(
+        id: id,
+        dateTime: dateTime,
+        total: total,
+        buyerName: buyerName,
+        items: items,
+      ),
+    );
+    notifyListeners();
+  }
+}
+
+class ContactProvider with ChangeNotifier {
+  String _fullName = "";
+  String _email = "";
+  String _phone = "";
+  String _address = "";
+
+  String get fullName {
+    return _fullName;
+  }
+
+  String get email {
+    return _email;
+  }
+
+  String get phone {
+    return _phone;
+  }
+
+  String get address {
+    return _address;
+  }
+
+  void setValue({
+    fullName,
+    email,
+    phone,
+    address,
+  }) {
+    if (fullName != null) {
+      _fullName = fullName;
+    }
+    if (email != null) {
+      _email = email;
+    }
+    if (phone != null) {
+      _phone = phone;
+    }
+    if (address != null) {
+      _address = address;
+    }
+    notifyListeners();
+  }
 }

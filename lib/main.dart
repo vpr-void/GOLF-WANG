@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:golfwang/data/models.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/cart.dart';
@@ -38,6 +39,12 @@ class GolfWang extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CartProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => OrderProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ContactProvider(),
+        ),
       ],
       child: MaterialApp(
         title: "GolfWang",
@@ -54,7 +61,7 @@ class GolfWang extends StatelessWidget {
         routes: {
           '/cart': (ctx) => GWCart(),
           '/checkout': (ctx) => GWCheckout(),
-          '/confirm' : (ctx) => GWConfirm(),
+          '/confirm': (ctx) => GWConfirm(),
           '/orders': (ctx) => GWOrders(),
           '/favs': (ctx) => GWShop(
                 isFavPage: true,

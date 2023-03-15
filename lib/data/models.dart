@@ -68,3 +68,19 @@ class CartItem with ChangeNotifier {
     required this.quantity,
   });
 }
+
+class Order {
+  final String id;
+  final DateTime dateTime;
+  final double total;
+  final String buyerName;
+  final List<CartItem> items;
+
+  Order({
+    required this.id,
+    required this.dateTime,
+    required this.total,
+    required this.buyerName,
+    required this.items,
+  });
+}
