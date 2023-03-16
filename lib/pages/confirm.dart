@@ -216,10 +216,10 @@ class GWConfirm extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (nameField.text != "" ||
-                        emailField.text != "" ||
-                        phoneField.text != "" ||
-                        addressField.text != "") {
+                    if (nameField.text.isNotEmpty &&
+                        emailField.text.isNotEmpty &&
+                        phoneField.text.isNotEmpty &&
+                        addressField.text.isNotEmpty) {
                       contactInfo.setValue(
                         fullName: nameField.text,
                         email: emailField.text,
