@@ -160,6 +160,15 @@ class _DetailsBodyState extends State<DetailsBody> {
                   item.designs[currentImgIdx],
                   item.price,
                 );
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text("Item Added to Cart."),
+                    duration: const Duration(seconds: 1),
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    elevation: 3,
+                  ),
+                );
               },
               child: const GWBigButton(text: "ADD TO CART"),
             )

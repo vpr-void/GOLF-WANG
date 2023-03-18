@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
 import 'models.dart';
 
@@ -213,8 +214,8 @@ class ItemsProvider with ChangeNotifier {
     return [..._items];
   }
 
-  Item getItem(id) {
-    return _items.where((e) => e.id == id).toList()[0];
+  Item? getItem(id) {
+    return _items.firstWhereOrNull((e) => e.id == id);
   }
 
   void addItem(item) {
@@ -238,6 +239,14 @@ class ItemsProvider with ChangeNotifier {
   void toggleFav(id) {
     _items.firstWhere((element) => element.id == id).toggleFav();
     notifyListeners();
+  }
+
+  void removeItem(id) {
+    var item = _items.firstWhereOrNull((element) => element.id == id);
+    if (item != null) {
+      _items.removeWhere((element) => element.id == id);
+      notifyListeners();
+    }
   }
 }
 

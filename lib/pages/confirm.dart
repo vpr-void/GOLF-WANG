@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:golfwang/data/datas.dart';
+import 'package:golfwang/widgets/items.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/nav.dart';
@@ -20,10 +21,6 @@ class GWConfirm extends StatelessWidget {
     cartProv.getCart.forEach((key, value) {
       cartItems.add(value);
     });
-    final borSide = BorderSide(
-      width: 2,
-      color: Theme.of(context).colorScheme.background,
-    );
 
     final contactInfo = Provider.of<ContactProvider>(context, listen: false);
     nameField.text = contactInfo.fullName;
@@ -71,7 +68,7 @@ class GWConfirm extends StatelessWidget {
                 ...cartItems.map((e) => GWCheckoutItem(e)),
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.fromBorderSide(borSide),
+                    border: Border.fromBorderSide(bside(context)),
                   ),
                   child: IntrinsicHeight(
                     child: Row(
@@ -81,7 +78,7 @@ class GWConfirm extends StatelessWidget {
                           width: 92,
                           height: 70,
                           decoration: BoxDecoration(
-                            border: Border(right: borSide),
+                            border: Border(right: bside(context)),
                             color: Theme.of(context).colorScheme.onBackground,
                           ),
                           child: const Center(
@@ -117,9 +114,9 @@ class GWConfirm extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: BoxDecoration(
                     border: Border(
-                      left: borSide,
-                      top: borSide,
-                      right: borSide,
+                      left: bside(context),
+                      top: bside(context),
+                      right: bside(context),
                     ),
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -128,6 +125,7 @@ class GWConfirm extends StatelessWidget {
                     onEditingComplete: () => FocusScope.of(context).nextFocus(),
                     cursorColor: Theme.of(context).colorScheme.background,
                     style: const TextStyle(fontSize: 18),
+                    textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Full Name",
@@ -143,9 +141,9 @@ class GWConfirm extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: BoxDecoration(
                     border: Border(
-                      left: borSide,
-                      top: borSide,
-                      right: borSide,
+                      left: bside(context),
+                      top: bside(context),
+                      right: bside(context),
                     ),
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -155,6 +153,7 @@ class GWConfirm extends StatelessWidget {
                     cursorColor: Theme.of(context).colorScheme.background,
                     style: const TextStyle(fontSize: 18),
                     keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Email",
@@ -170,9 +169,9 @@ class GWConfirm extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: BoxDecoration(
                     border: Border(
-                      left: borSide,
-                      top: borSide,
-                      right: borSide,
+                      left: bside(context),
+                      top: bside(context),
+                      right: bside(context),
                     ),
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -182,6 +181,7 @@ class GWConfirm extends StatelessWidget {
                     cursorColor: Theme.of(context).colorScheme.background,
                     style: const TextStyle(fontSize: 18),
                     keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Phone",
@@ -197,9 +197,9 @@ class GWConfirm extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: BoxDecoration(
                     border: Border(
-                      left: borSide,
-                      top: borSide,
-                      right: borSide,
+                      left: bside(context),
+                      top: bside(context),
+                      right: bside(context),
                     ),
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
@@ -241,13 +241,24 @@ class GWConfirm extends StatelessWidget {
                       );
                       cartProv.clearCart();
                       Navigator.of(context).pushNamed("/orders");
+                    } else {
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text("Please fill all fields."),
+                          duration: const Duration(seconds: 1),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
+                          elevation: 3,
+                        ),
+                      );
                     }
                   },
                   child: Container(
                     height: 70,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        border: Border.fromBorderSide(borSide),
+                        border: Border.fromBorderSide(bside(context)),
                         color: Theme.of(context).colorScheme.tertiary,
                         boxShadow: [
                           BoxShadow(
@@ -275,17 +286,12 @@ class GWCheckoutItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borSide = BorderSide(
-      width: 2,
-      color: Theme.of(context).colorScheme.background,
-    );
-
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          top: borSide,
-          right: borSide,
-          left: borSide,
+          top: bside(context),
+          right: bside(context),
+          left: bside(context),
         ),
         color: Theme.of(context).colorScheme.onBackground,
       ),
@@ -296,7 +302,7 @@ class GWCheckoutItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
-                border: Border(right: borSide),
+                border: Border(right: bside(context)),
                 color: Theme.of(context).colorScheme.onBackground,
               ),
               child: Image.network(
@@ -337,7 +343,7 @@ class GWCheckoutItem extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 2, horizontal: 7),
                           decoration: BoxDecoration(
-                            border: Border.fromBorderSide(borSide),
+                            border: Border.fromBorderSide(bside(context)),
                             borderRadius: BorderRadius.circular(20),
                             color: Theme.of(context).colorScheme.tertiary,
                           ),
@@ -355,7 +361,7 @@ class GWCheckoutItem extends StatelessWidget {
             Container(
               width: 80,
               decoration: BoxDecoration(
-                border: Border(left: borSide),
+                border: Border(left: bside(context)),
                 color: Theme.of(context).colorScheme.secondary,
               ),
               child: Center(

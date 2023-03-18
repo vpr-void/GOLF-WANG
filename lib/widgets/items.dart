@@ -19,10 +19,7 @@ class GWShopItem extends StatelessWidget {
     return Container(
       width: 160,
       decoration: BoxDecoration(
-        border: Border.all(
-          width: 2,
-          color: Theme.of(context).colorScheme.background,
-        ),
+        border: Border.fromBorderSide(bside(context)),
         color: bgColor,
         boxShadow: [
           BoxShadow(
@@ -36,10 +33,7 @@ class GWShopItem extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(
-                  width: 2,
-                  color: Theme.of(context).colorScheme.background,
-                ),
+                bottom: bside(context),
               ),
             ),
             child: Hero(
@@ -72,10 +66,7 @@ class GWShopItem extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                          width: 2,
-                          color: Theme.of(context).colorScheme.background,
-                        ),
+                        border: Border.fromBorderSide(bside(context)),
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                       child: Text("\$ ${item.price.truncate()}",
@@ -148,15 +139,19 @@ class ColorRow extends StatelessWidget {
 }
 
 class GWDropdown extends StatelessWidget {
-  final List<ItemSizes> items;
-  final ItemSizes selectedValue;
+  final List<dynamic> items;
+  final dynamic selectedValue;
   final Function onChange;
+  final bool bold;
+  final Color itemColor;
 
   const GWDropdown({
     super.key,
     required this.items,
     required this.selectedValue,
     required this.onChange,
+    this.bold = true,
+    this.itemColor = const Color(0xFFBDD6E5),
   });
 
   @override
@@ -169,10 +164,7 @@ class GWDropdown extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
-        border: Border.all(
-          width: 2,
-          color: Theme.of(context).colorScheme.background,
-        ),
+        border: Border.fromBorderSide(bside(context)),
       ),
       child: DropdownButton(
         value: selectedValue,
@@ -182,17 +174,18 @@ class GWDropdown extends StatelessWidget {
         items: items.map((x) {
           return DropdownMenuItem(
             value: x,
-            child: Text(x.name),
+            child: Text(x.toString().split('.').last.toUpperCase()),
           );
         }).toList(),
-        dropdownColor: Theme.of(context).colorScheme.secondary,
+        dropdownColor: itemColor,
         elevation: 0,
         borderRadius: BorderRadius.circular(0),
         isExpanded: true,
-        style: const TextStyle(
-            fontSize: 16,
-            color: Colors.black,
-            fontFamily: "Cabinet Grotesk Bold"),
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.black,
+          fontFamily: bold ? "Cabinet Grotesk Bold" : "Cabinet Grotesk",
+        ),
         underline: Container(color: Theme.of(context).colorScheme.tertiary),
         focusColor: Theme.of(context).colorScheme.secondary,
         alignment: Alignment.center,
@@ -255,11 +248,6 @@ class GWEmptyMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderSide = BorderSide(
-      width: 2,
-      color: Theme.of(context).colorScheme.background,
-    );
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -268,9 +256,9 @@ class GWEmptyMessage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 175, horizontal: 50),
           decoration: BoxDecoration(
             border: Border(
-              left: borderSide,
-              right: borderSide,
-              top: borderSide,
+              left: bside(context),
+              right: bside(context),
+              top: bside(context),
             ),
             color: Theme.of(context).colorScheme.onBackground,
           ),
@@ -298,4 +286,8 @@ class GWEmptyMessage extends StatelessWidget {
       ],
     );
   }
+}
+
+BorderSide bside(ctx) {
+  return BorderSide(width: 2, color: Theme.of(ctx).colorScheme.background);
 }

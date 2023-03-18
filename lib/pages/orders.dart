@@ -75,9 +75,6 @@ class _GWExpandState extends State<GWExpand> {
 
   @override
   Widget build(BuildContext context) {
-    final BorderSide bside =
-        BorderSide(width: 2, color: Theme.of(context).colorScheme.background);
-
     return Column(
       children: [
         GestureDetector(
@@ -89,7 +86,7 @@ class _GWExpandState extends State<GWExpand> {
           child: Container(
             padding: const EdgeInsets.only(right: 20),
             decoration: BoxDecoration(
-              border: Border.fromBorderSide(bside),
+              border: Border.fromBorderSide(bside(context)),
               color: Theme.of(context).colorScheme.onBackground,
             ),
             child: IntrinsicHeight(
@@ -102,7 +99,7 @@ class _GWExpandState extends State<GWExpand> {
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.surface,
-                        border: Border(right: bside)),
+                        border: Border(right: bside(context))),
                     child: Center(
                       child: Text(
                         "\$ ${widget.order.total.toStringAsFixed(0)}",
@@ -153,9 +150,9 @@ class _GWExpandState extends State<GWExpand> {
           width: double.infinity,
           decoration: BoxDecoration(
             border: Border(
-              left: bside,
-              right: bside,
-              bottom: bside,
+              left: bside(context),
+              right: bside(context),
+              bottom: bside(context),
             ),
             color: Theme.of(context).colorScheme.secondary,
           ),

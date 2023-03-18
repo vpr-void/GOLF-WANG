@@ -18,14 +18,14 @@ enum ItemTypes {
 
 class Item with ChangeNotifier {
   final String id;
-  final String name;
-  final String description;
-  final double price;
-  final bool isNew;
+  String name;
+  String description;
+  double price;
+  bool isNew;
   bool isFav;
-  final List<ItemSizes> sizes;
-  final ItemTypes itemType;
-  final List<ItemDesign> designs;
+  List<ItemSizes> sizes;
+  ItemTypes itemType;
+  List<ItemDesign> designs;
 
   Item({
     required this.id,

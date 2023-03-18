@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:golfwang/widgets/items.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
@@ -206,10 +207,7 @@ class GWLinkItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: color,
-          border: Border.all(
-            width: 2,
-            color: Theme.of(context).colorScheme.background,
-          ),
+          border: Border.fromBorderSide(bside(context)),
           boxShadow: [
             BoxShadow(
               color: Theme.of(context).colorScheme.background,

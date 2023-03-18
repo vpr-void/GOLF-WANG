@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/cart.dart';
-import 'pages/checkout.dart';
 import 'pages/confirm.dart';
 import 'pages/create.dart';
 import 'pages/details.dart';
@@ -59,14 +58,13 @@ class GolfWang extends StatelessWidget {
         home: const GWShop(),
         routes: {
           '/cart': (ctx) => const GWCart(),
-          '/checkout': (ctx) => GWCheckout(),
           '/confirm': (ctx) => GWConfirm(),
           '/orders': (ctx) => const GWOrders(),
           '/favs': (ctx) => const GWShop(
                 isFavPage: true,
               ),
           '/details': (ctx) => const GWDetails(),
-          '/manage': (ctx) => GWManage(),
+          '/manage': (ctx) => const GWManage(),
           '/create': (ctx) => GWCreate(),
         },
       ),

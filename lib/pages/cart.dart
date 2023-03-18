@@ -17,10 +17,6 @@ class GWCart extends StatelessWidget {
     cartProv.getCart.forEach((key, value) {
       cartItems.add(value);
     });
-    final borderSide = BorderSide(
-      width: 2,
-      color: Theme.of(context).colorScheme.background,
-    );
 
     List emptyCart = [
       const GWEmptyMessage(
@@ -34,15 +30,24 @@ class GWCart extends StatelessWidget {
           child: GWCartItem(e.id),
           onDismissed: (_) {
             cartProv.removeItem(e.id);
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text("Item Removed from Cart."),
+                duration: const Duration(seconds: 1),
+                backgroundColor: Theme.of(context).colorScheme.background,
+                elevation: 3,
+              ),
+            );
           },
         ),
       ),
       Container(
         decoration: BoxDecoration(
           border: Border(
-            left: borderSide,
-            right: borderSide,
-            top: borderSide,
+            left: bside(context),
+            right: bside(context),
+            top: bside(context),
           ),
           color: Theme.of(context).colorScheme.onBackground,
         ),
@@ -53,7 +58,7 @@ class GWCart extends StatelessWidget {
               height: 80,
               decoration: BoxDecoration(
                 border: Border(
-                  right: borderSide,
+                  right: bside(context),
                 ),
                 color: Theme.of(context).colorScheme.onBackground,
               ),
@@ -80,9 +85,9 @@ class GWCart extends StatelessWidget {
       Container(
         decoration: BoxDecoration(
           border: Border(
-            left: borderSide,
-            right: borderSide,
-            top: borderSide,
+            left: bside(context),
+            right: bside(context),
+            top: bside(context),
           ),
           color: Theme.of(context).colorScheme.tertiary,
         ),
@@ -93,7 +98,7 @@ class GWCart extends StatelessWidget {
               height: 80,
               decoration: BoxDecoration(
                 border: Border(
-                  right: borderSide,
+                  right: bside(context),
                 ),
                 color: Theme.of(context).colorScheme.onBackground,
               ),
@@ -177,17 +182,12 @@ class GWCartItem extends StatelessWidget {
     final cartProv = Provider.of<CartProvider>(context);
     final cartItem = cartProv.getCartItem(id);
 
-    final borderSide = BorderSide(
-      width: 2,
-      color: Theme.of(context).colorScheme.background,
-    );
-
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          left: borderSide,
-          right: borderSide,
-          top: borderSide,
+          left: bside(context),
+          right: bside(context),
+          top: bside(context),
         ),
         color: Theme.of(context).colorScheme.onBackground,
       ),
@@ -198,7 +198,7 @@ class GWCartItem extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.onBackground,
-                border: Border(right: borderSide),
+                border: Border(right: bside(context)),
               ),
               child: Image.network(
                 cartItem.design.img,
@@ -246,8 +246,8 @@ class GWCartItem extends StatelessWidget {
                         Container(
                           decoration: BoxDecoration(
                             border: Border(
-                              top: borderSide,
-                              right: borderSide,
+                              top: bside(context),
+                              right: bside(context),
                             ),
                             color: Theme.of(context).colorScheme.surface,
                           ),
@@ -264,7 +264,7 @@ class GWCartItem extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               border: Border(
-                                top: borderSide,
+                                top: bside(context),
                               ),
                               color: Theme.of(context).colorScheme.secondary,
                             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:golfwang/pages/menu.dart';
+import 'package:golfwang/widgets/items.dart';
 
 class GWNav extends StatelessWidget {
   final String title;
@@ -26,10 +27,7 @@ class GWNav extends StatelessWidget {
         decoration: BoxDecoration(
           color: background,
           border: Border(
-            bottom: BorderSide(
-              width: 2,
-              color: Theme.of(context).colorScheme.background,
-            ),
+            bottom: bside(context),
           ),
         ),
         child: Row(
@@ -102,10 +100,7 @@ class GWChip extends StatelessWidget {
             ? selectedColor
             : Theme.of(context).colorScheme.onBackground,
         borderRadius: BorderRadius.circular(25),
-        border: Border.all(
-          width: 2,
-          color: Theme.of(context).colorScheme.background,
-        ),
+        border: Border.fromBorderSide(bside(context)),
       ),
       child: Text(
         label,
