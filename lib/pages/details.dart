@@ -161,7 +161,7 @@ class _DetailsBodyState extends State<DetailsBody> {
                   item.price,
                 );
               },
-              child: GWBigButton(text: "ADD TO CART"),
+              child: const GWBigButton(text: "ADD TO CART"),
             )
           ],
         ),

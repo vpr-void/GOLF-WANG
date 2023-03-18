@@ -296,7 +296,6 @@ class CartProvider with ChangeNotifier {
   void increaseItem(id) {
     if (_cartItems.containsKey(id)) {
       _cartItems[id]!.quantity += 1;
-      print("$id added");
       notifyListeners();
     }
   }
@@ -326,7 +325,7 @@ class CartProvider with ChangeNotifier {
 }
 
 class OrderProvider with ChangeNotifier {
-  List<Order> _orders = [];
+  final List<Order> _orders = [];
 
   List<Order> get getOrders {
     return _orders;

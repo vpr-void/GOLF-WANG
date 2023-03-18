@@ -8,6 +8,8 @@ import '../data/datas.dart';
 import '../data/models.dart';
 
 class GWCart extends StatelessWidget {
+  const GWCart({super.key});
+
   @override
   Widget build(BuildContext context) {
     final cartProv = Provider.of<CartProvider>(context);
@@ -21,7 +23,8 @@ class GWCart extends StatelessWidget {
     );
 
     List emptyCart = [
-      GWEmptyMessage(message: "Cart is Empty.", icon: "assets/icons/cart.svg"),
+      const GWEmptyMessage(
+          message: "Cart is Empty.", icon: "assets/icons/cart.svg"),
     ];
 
     List itemCart = [
@@ -54,7 +57,7 @@ class GWCart extends StatelessWidget {
                 ),
                 color: Theme.of(context).colorScheme.onBackground,
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   "Delivery",
                   style: TextStyle(fontSize: 20),
@@ -63,11 +66,11 @@ class GWCart extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 alignment: Alignment.centerRight,
                 child: Text(
                   "\$ ${cartProv.deliveryFee.toStringAsFixed(0)}",
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
             ),
@@ -94,7 +97,7 @@ class GWCart extends StatelessWidget {
                 ),
                 color: Theme.of(context).colorScheme.onBackground,
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   "Total",
                   style: TextStyle(fontSize: 20),
@@ -103,11 +106,11 @@ class GWCart extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 alignment: Alignment.centerRight,
                 child: Text(
                   "\$ ${cartProv.getTotal}",
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
             ),
@@ -118,7 +121,7 @@ class GWCart extends StatelessWidget {
         onTap: () {
           Navigator.of(context).pushNamed("/confirm");
         },
-        child: GWBigButton(text: "CHECKOUT"),
+        child: const GWBigButton(text: "CHECKOUT"),
       ),
     ];
 
@@ -133,30 +136,30 @@ class GWCart extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 32),
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
             child: Column(
               children: [
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Your Cart.",
                       style: TextStyle(
                         fontSize: 20,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
                       cartProv.cartItemCount == 1
                           ? "${cartProv.cartItemCount} items"
                           : "${cartProv.cartItemCount} item",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
-                ...cartItems.length == 0 ? emptyCart : itemCart,
+                const SizedBox(height: 30),
+                ...cartItems.isEmpty ? emptyCart : itemCart,
               ],
             ),
           ),
@@ -204,100 +207,97 @@ class GWCartItem extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
-                child: Column(
-                  children: [
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-                      child: Column(
-                        children: [
-                          Text(
-                            cartItem.name,
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          SizedBox(height: 5),
-                          Row(
-                            children: [
-                              Container(
-                                width: 15,
-                                height: 15,
-                                decoration: BoxDecoration(
-                                  color: cartItem.design.color,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 25, horizontal: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          cartItem.name,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                        const SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              width: 15,
+                              height: 15,
+                              decoration: BoxDecoration(
+                                color: cartItem.design.color,
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              SizedBox(width: 10),
-                              Text(
-                                cartItem.size.name,
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              cartItem.size.name,
+                              style: const TextStyle(fontSize: 14),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
-                    IntrinsicHeight(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Container(
+                  ),
+                  IntrinsicHeight(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border(
+                              top: borderSide,
+                              right: borderSide,
+                            ),
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                          width: 120,
+                          height: 50,
+                          child: Center(
+                            child: Text(
+                              "\$ ${(cartItem.price * cartItem.quantity).toStringAsFixed(0)}",
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
                             decoration: BoxDecoration(
                               border: Border(
                                 top: borderSide,
-                                right: borderSide,
                               ),
-                              color: Theme.of(context).colorScheme.surface,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
-                            width: 120,
-                            height: 50,
-                            child: Center(
-                              child: Text(
-                                "\$ ${(cartItem.price * cartItem.quantity).toStringAsFixed(0)}",
-                                style: TextStyle(fontSize: 16),
-                              ),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    cartProv.decreaseItem(cartItem.id);
+                                  },
+                                  child: SvgPicture.asset(
+                                      "assets/icons/minus.svg"),
+                                ),
+                                Text(
+                                  (cartItem.quantity).toString(),
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    cartProv.increaseItem(cartItem.id);
+                                  },
+                                  child:
+                                      SvgPicture.asset("assets/icons/plus.svg"),
+                                ),
+                              ],
                             ),
                           ),
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  top: borderSide,
-                                ),
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      cartProv.decreaseItem(cartItem.id);
-                                    },
-                                    child: SvgPicture.asset(
-                                        "assets/icons/minus.svg"),
-                                  ),
-                                  Text(
-                                    (cartItem.quantity).toString(),
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      cartProv.increaseItem(cartItem.id);
-                                    },
-                                    child: SvgPicture.asset(
-                                        "assets/icons/plus.svg"),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
             )
           ],

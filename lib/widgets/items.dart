@@ -235,7 +235,8 @@ class GWBigButton extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: TextStyle(fontSize: 24, fontFamily: "Cabinet Grotesk Bold"),
+          style:
+              const TextStyle(fontSize: 24, fontFamily: "Cabinet Grotesk Bold"),
         ),
       ),
     );
@@ -264,7 +265,7 @@ class GWEmptyMessage extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 175, horizontal: 50),
+          padding: const EdgeInsets.symmetric(vertical: 175, horizontal: 50),
           decoration: BoxDecoration(
             border: Border(
               left: borderSide,
@@ -280,10 +281,10 @@ class GWEmptyMessage extends StatelessWidget {
                 width: 75,
                 height: 75,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 message,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               )
             ],
           ),
@@ -292,7 +293,7 @@ class GWEmptyMessage extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushNamed("/");
           },
-          child: GWBigButton(text: "GO TO SHOP"),
+          child: const GWBigButton(text: "GO TO SHOP"),
         ),
       ],
     );

@@ -11,6 +11,8 @@ class GWConfirm extends StatelessWidget {
   final phoneField = TextEditingController();
   final addressField = TextEditingController();
 
+  GWConfirm({super.key});
+
   @override
   Widget build(BuildContext context) {
     final cartProv = Provider.of<CartProvider>(context, listen: false);
@@ -42,30 +44,30 @@ class GWConfirm extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 32),
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 32),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Checkout.",
                       style: TextStyle(
                         fontSize: 20,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
                       cartProv.cartItemCount == 1
                           ? "${cartProv.cartItemCount} items"
                           : "${cartProv.cartItemCount} item",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 ...cartItems.map((e) => GWCheckoutItem(e)),
                 Container(
                   decoration: BoxDecoration(
@@ -82,7 +84,7 @@ class GWConfirm extends StatelessWidget {
                             border: Border(right: borSide),
                             color: Theme.of(context).colorScheme.onBackground,
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               "Total",
                               style: TextStyle(fontSize: 18),
@@ -92,11 +94,11 @@ class GWConfirm extends StatelessWidget {
                         Expanded(
                           child: Container(
                             color: Theme.of(context).colorScheme.surface,
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.centerRight,
                             child: Text(
                               "\$ ${cartProv.getTotal}",
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                             ),
                           ),
                         ),
@@ -104,14 +106,15 @@ class GWConfirm extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 50),
-                Text(
+                const SizedBox(height: 50),
+                const Text(
                   "Contact Info.",
                   style: TextStyle(fontSize: 18),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: BoxDecoration(
                     border: Border(
                       left: borSide,
@@ -124,7 +127,7 @@ class GWConfirm extends StatelessWidget {
                     controller: nameField,
                     onEditingComplete: () => FocusScope.of(context).nextFocus(),
                     cursorColor: Theme.of(context).colorScheme.background,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Full Name",
@@ -136,7 +139,8 @@ class GWConfirm extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: BoxDecoration(
                     border: Border(
                       left: borSide,
@@ -149,7 +153,7 @@ class GWConfirm extends StatelessWidget {
                     controller: emailField,
                     onEditingComplete: () => FocusScope.of(context).nextFocus(),
                     cursorColor: Theme.of(context).colorScheme.background,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -162,7 +166,8 @@ class GWConfirm extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: BoxDecoration(
                     border: Border(
                       left: borSide,
@@ -175,7 +180,7 @@ class GWConfirm extends StatelessWidget {
                     controller: phoneField,
                     onEditingComplete: () => FocusScope.of(context).nextFocus(),
                     cursorColor: Theme.of(context).colorScheme.background,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -188,7 +193,8 @@ class GWConfirm extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: BoxDecoration(
                     border: Border(
                       left: borSide,
@@ -201,7 +207,7 @@ class GWConfirm extends StatelessWidget {
                     controller: addressField,
                     onEditingComplete: () => FocusScope.of(context).nextFocus(),
                     cursorColor: Theme.of(context).colorScheme.background,
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                     maxLines: 3,
                     keyboardType: TextInputType.multiline,
                     decoration: InputDecoration(
@@ -249,7 +255,7 @@ class GWConfirm extends StatelessWidget {
                             offset: const Offset(0, 3),
                           ),
                         ]),
-                    child: Center(
+                    child: const Center(
                         child: Text(
                       "CONFIRM ORDER.",
                       style: TextStyle(fontSize: 18),
@@ -288,7 +294,7 @@ class GWCheckoutItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
                 border: Border(right: borSide),
                 color: Theme.of(context).colorScheme.onBackground,
@@ -301,15 +307,16 @@ class GWCheckoutItem extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       item.name,
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         Container(
@@ -320,15 +327,15 @@ class GWCheckoutItem extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Text(
                           item.size.name,
-                          style: TextStyle(fontSize: 14),
+                          style: const TextStyle(fontSize: 14),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 7),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 2, horizontal: 7),
                           decoration: BoxDecoration(
                             border: Border.fromBorderSide(borSide),
                             borderRadius: BorderRadius.circular(20),
@@ -336,7 +343,7 @@ class GWCheckoutItem extends StatelessWidget {
                           ),
                           child: Text(
                             "x${item.quantity}",
-                            style: TextStyle(fontSize: 12),
+                            style: const TextStyle(fontSize: 12),
                           ),
                         )
                       ],
@@ -354,7 +361,7 @@ class GWCheckoutItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   "\$ ${(item.price * item.quantity).toStringAsFixed(0)}",
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
               ),
             ),

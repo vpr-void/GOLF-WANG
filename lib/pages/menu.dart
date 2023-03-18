@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/nav.dart';
+import '../data/datas.dart';
 
 class GWMenu extends StatelessWidget {
   final List<Map> menus = const [
@@ -104,8 +103,17 @@ class GWMenuItem extends StatelessWidget {
     this.route = "/",
   });
 
+  Widget renderText(name) {
+    return Text(
+      name,
+      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final cartCount = Provider.of<CartProvider>(context).cartItemCount;
+
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushReplacementNamed(route);
@@ -129,10 +137,30 @@ class GWMenuItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              name,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-            ),
+            name == "CART" && cartCount > 0
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      renderText(name),
+                      const SizedBox(width: 10),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                        child: Center(
+                          child: Text(
+                            cartCount.toString(),
+                            style: const TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w900),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                : renderText(name),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 32),
               decoration: BoxDecoration(
@@ -173,7 +201,6 @@ class GWLinkItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("lanch");
         launchUrl(Uri.parse(link), mode: LaunchMode.externalApplication);
       },
       child: Container(

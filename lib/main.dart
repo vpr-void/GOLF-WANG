@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:golfwang/data/models.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/cart.dart';
@@ -59,11 +58,11 @@ class GolfWang extends StatelessWidget {
         ),
         home: const GWShop(),
         routes: {
-          '/cart': (ctx) => GWCart(),
+          '/cart': (ctx) => const GWCart(),
           '/checkout': (ctx) => GWCheckout(),
           '/confirm': (ctx) => GWConfirm(),
-          '/orders': (ctx) => GWOrders(),
-          '/favs': (ctx) => GWShop(
+          '/orders': (ctx) => const GWOrders(),
+          '/favs': (ctx) => const GWShop(
                 isFavPage: true,
               ),
           '/details': (ctx) => const GWDetails(),
@@ -74,6 +73,3 @@ class GolfWang extends StatelessWidget {
     );
   }
 }
-
-
-// ############ add cart item count on menu
