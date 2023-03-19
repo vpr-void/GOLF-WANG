@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:golfwang/data/datas.dart';
-import 'package:golfwang/widgets/items.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/nav.dart';
 import '../data/models.dart';
+import '../data/datas.dart';
+import '../widgets/items.dart';
 
 class GWConfirm extends StatelessWidget {
   final nameField = TextEditingController();
@@ -242,16 +242,7 @@ class GWConfirm extends StatelessWidget {
                       cartProv.clearCart();
                       Navigator.of(context).pushNamed("/orders");
                     } else {
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: const Text("Please fill all fields."),
-                          duration: const Duration(seconds: 1),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.background,
-                          elevation: 3,
-                        ),
-                      );
+                      showSnack(context, "Please fill all fields.");
                     }
                   },
                   child: Container(

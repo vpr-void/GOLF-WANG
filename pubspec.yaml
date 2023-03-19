@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  collection: any
   flutter:
     sdk: flutter
 
@@ -39,6 +40,9 @@ dependencies:
   flutter_svg: ^2.0.2
   url_launcher: ^6.1.10
   intl: ^0.18.0
+  palette_generator: ^0.3.3+2
+  icons_launcher: ^2.1.0
+  flutter_native_splash: ^2.2.19
 
 dev_dependencies:
   flutter_test:
@@ -90,3 +94,18 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
+icons_launcher:
+  image_path: "assets/app_icon.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
+
+flutter_native_splash:
+  image: assets/splash.png     
+  color: "#BDD6E5"
+  android: true
+  ios: true

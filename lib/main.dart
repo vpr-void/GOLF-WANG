@@ -65,7 +65,7 @@ class GolfWang extends StatelessWidget {
               ),
           '/details': (ctx) => const GWDetails(),
           '/manage': (ctx) => const GWManage(),
-          '/create': (ctx) => GWCreate(),
+          '/create': (ctx) => const GWCreate(),
         },
       ),
     );

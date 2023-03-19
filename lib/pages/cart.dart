@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:golfwang/widgets/items.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/nav.dart';
 import '../data/datas.dart';
 import '../data/models.dart';
+import '../widgets/items.dart';
 
 class GWCart extends StatelessWidget {
   const GWCart({super.key});
@@ -30,15 +30,7 @@ class GWCart extends StatelessWidget {
           child: GWCartItem(e.id),
           onDismissed: (_) {
             cartProv.removeItem(e.id);
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: const Text("Item Removed from Cart."),
-                duration: const Duration(seconds: 1),
-                backgroundColor: Theme.of(context).colorScheme.background,
-                elevation: 3,
-              ),
-            );
+            showSnack(context, "Item Removed from Cart.");
           },
         ),
       ),

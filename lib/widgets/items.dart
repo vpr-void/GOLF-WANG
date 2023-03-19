@@ -157,7 +157,7 @@ class GWDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
+      width: 160,
       padding: const EdgeInsets.symmetric(
         vertical: 0,
         horizontal: 14,
@@ -290,4 +290,16 @@ class GWEmptyMessage extends StatelessWidget {
 
 BorderSide bside(ctx) {
   return BorderSide(width: 2, color: Theme.of(ctx).colorScheme.background);
+}
+
+void showSnack(context, message) {
+  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+      duration: const Duration(seconds: 1),
+      backgroundColor: Theme.of(context).colorScheme.background,
+      elevation: 3,
+    ),
+  );
 }

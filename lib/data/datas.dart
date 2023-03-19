@@ -248,6 +248,41 @@ class ItemsProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void createItem(data) {
+    Item itm = Item(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      name: data["name"],
+      description: data["description"],
+      price: data["price"],
+      sizes: [...data["sizes"]],
+      isNew: data["isNew"],
+      itemType: data["type"],
+      designs: [...data["designs"]],
+    );
+
+    _items.add(itm);
+    notifyListeners();
+  }
+
+  void updateItem(id, data) {
+    Item? itm = _items.firstWhereOrNull((element) => element.id == id);
+
+    if (itm != null) {
+      Item tempItm = Item(
+        id: id,
+        name: data["name"],
+        description: data["description"],
+        price: data["price"],
+        sizes: [...data["sizes"]],
+        isNew: data["isNew"],
+        itemType: data["type"],
+        designs: [...data["designs"]],
+      );
+      _items[_items.indexWhere((element) => element.id == id)] = tempItm;
+      notifyListeners();
+    }
+  }
 }
 
 class CartProvider with ChangeNotifier {
