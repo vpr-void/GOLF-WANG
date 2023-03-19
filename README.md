@@ -8,5 +8,6 @@
 
 * based on Tyler, the Creator's [GOLF WANG](https://golfwang.com/)
 
-<img src="https://github.com/ThutaYeAg/GOLF-WANG/blob/master/assets/cover.png" width="750"/>
+
+![Cover](https://github.com/ThutaYeAg/GOLF-WANG/blob/master/assets/cover.png)
 
