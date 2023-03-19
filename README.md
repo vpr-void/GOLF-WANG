@@ -1,16 +1,11 @@
-# golfwang
+# GOLF WANG
 
-A new Flutter project.
+### Flutter State Management Project using Provider Pattern.
 
-## Getting Started
+* __Download__ [.apk]()
+ 
+* __Neo-Brutalism__ inspired UI. see [dribbble](https://dribbble.com/shots/20957838-GOLF-WANG)
 
-This project is a starting point for a Flutter application.
+* based on Tyler, the Creator's [GOLF WANG](https://golfwang.com/)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
