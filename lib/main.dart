@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/cart.dart';
@@ -13,6 +14,12 @@ import 'data/datas.dart';
 
 void main() {
   runApp(GolfWang());
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
 }
 
 class GolfWang extends StatelessWidget {
