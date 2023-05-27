@@ -4,7 +4,7 @@
 
 * [__Download__](https://github.com/ThutaYeAg/GOLF-WANG/releases/tag/latest)
  
-* __Neo-Brutalism__ UI. see [dribbble](https://dribbble.com/shots/20957838-GOLF-WANG)
+* __Neo-Brutalism__ UI. see my [Behance](https://www.behance.net/gallery/169263161/GOLF-WANG)
 
 * based on Tyler, the Creator's [GOLF WANG](https://golfwang.com/)
 
