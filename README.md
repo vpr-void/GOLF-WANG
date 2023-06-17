@@ -1,6 +1,6 @@
 # GOLF WANG
 
-### Flutter State Management Project using Provider Pattern.
+### Flutter State Management using Provider Pattern.
 
 * [__Download__](https://github.com/ThutaYeAg/GOLF-WANG/releases/tag/latest)
  
