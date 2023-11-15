@@ -67,7 +67,8 @@ class ItemsProvider with ChangeNotifier {
       itemType: ItemTypes.tees,
       designs: [
         ItemDesign(
-          "https://cdn.shopify.com/s/files/1/0412/0133/6481/products/SAVETHEBEESTEE-WHITE_PINK2_1080x.jpg?v=1642715799",
+          // "https://cdn.shopify.com/s/files/1/0412/0133/6481/products/SAVETHEBEESTEE-WHITE_PINK2_1080x.jpg?v=1642715799",
+          "https://golfwangofficial.com/wp-content/uploads/2020/11/Hfc948bc6ee034d16b5812d2502e7f726x.jpg",
           const Color(0xFFe7e9f8),
         ),
         ItemDesign(
