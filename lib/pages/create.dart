@@ -369,7 +369,7 @@ class _GWCreateState extends State<GWCreate> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 0),
               GestureDetector(
                 onTap: () async {
                   if (nameCont.text == "" ||

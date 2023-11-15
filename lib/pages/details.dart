@@ -91,15 +91,16 @@ class _DetailsBodyState extends State<DetailsBody> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  alignment: Alignment.centerLeft,
-                  width: 300,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      item.name,
-                      style: const TextStyle(
-                          fontSize: 24, fontFamily: "Cabinet Grotesk Bold"),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        item.name,
+                        style: const TextStyle(
+                            fontSize: 24, fontFamily: "Cabinet Grotesk Bold"),
+                      ),
                     ),
                   ),
                 ),

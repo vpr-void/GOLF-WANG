@@ -55,7 +55,7 @@ class GWMenu extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 32),
+        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 32),
         child: Column(
           children: [
             ListView.separated(
@@ -71,7 +71,7 @@ class GWMenu extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 0),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
