@@ -2,7 +2,7 @@
 
 #### Flutter Basic State Management ( Provider Pattern ) and custom UI check.
 
-* [__Download__](https://github.com/ThutaYeAg/GOLF-WANG/releases/tag/latest)
+* [__Download__](https://github.com/vpr-void/GOLF-WANG/releases/tag/fix)
  
 * __Neo-Brutalism__ UI. see my [Behance](https://www.behance.net/gallery/169263161/GOLF-WANG)
 
